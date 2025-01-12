@@ -335,12 +335,6 @@ class DiscoveredHostsController < ::ApplicationController
     Bullet.enable = true if defined? Bullet
   end
 
-  def get_interfaces
-    @host.interfaces.each do |interface|
-      @interfaces << {:identifier => interface["identifier"], :type => interface["type"], :mac => interface["mac"], :ip => interface["ip"]? interface["ip"] : "N/A", :primary => interface["primary"], :provision => interface["provision"]}
-    end
-  end
-
   def add_custom_facts
     unless @host.primary_interface.subnet.nil?
       discovery_subnet = "#{@host.primary_interface.subnet.name} (#{@host.primary_interface.subnet.network})"
